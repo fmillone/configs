@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -8,7 +15,9 @@ export ZSH="/Users/frank/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster2"
+
+### ZSH_THEME="agnoster2"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,40 +79,46 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git colorize colored-man-pages zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-DEFAULT_USER=frank;
-prompt_tools_versions() {
-  local NODE_VERSION=$(node -v)
-  docker ps &>/dev/null ; local DOCKER_ACTIVE=$?
-  if [ $DOCKER_ACTIVE -eq 0  ]; then 
-    local DOCKER_STATUS='✓'
-  else
-    local DOCKER_STATUS='✘';
-  fi
-  prompt_segment 'green' '28m' " ⬢ ";
-  prompt_segment 'green' 'black' "${NODE_VERSION}";
-  prompt_segment 'blue' '' " Docker ${DOCKER_STATUS}"
-}
+#DEFAULT_USER=frank;
+#prompt_tools_versions() {
+#  local NODE_VERSION=$(node -v)
+#  docker ps &>/dev/null ; local DOCKER_ACTIVE=$?
+#  if [ $DOCKER_ACTIVE -eq 0  ]; then 
+#    local DOCKER_STATUS='✓'
+#  else
+#    local DOCKER_STATUS='✘';
+#  fi
+#  prompt_segment 'green' '28m' " ⬢ ";
+#  prompt_segment 'green' 'black' "${NODE_VERSION}";
+#  prompt_segment 'blue' '' " Docker ${DOCKER_STATUS}"
+#}
 
-prompt_newline() {
-  prompt_segment '' '' '\n';
-}
+#prompt_newline() {
+#  prompt_segment '' '' '\n';
+#}
 
-prompt_dir() {
-  prompt_segment '240m' default ' %~ '
-}
+#prompt_dir() {
+#  prompt_segment '240m' default ' %~ '
+#}
 
-AGNOSTER_PROMPT_SEGMENTS=("prompt_tools_versions" "prompt_newline" "${AGNOSTER_PROMPT_SEGMENTS[@]}");
+#AGNOSTER_PROMPT_SEGMENTS=("prompt_tools_versions" "prompt_newline" "${AGNOSTER_PROMPT_SEGMENTS[@]}");
 export EDITOR=vim
 
 # Aliases
 alias gl='git --no-pager log --oneline'
 alias grom='git rebase origin/master'
+alias grod='git rebase origin/develop'
 alias nest='npx @nestjs/cli'
 alias gss='git status -sb'
+alias dai_price="curl 'https://be.buenbit.com/api/market/tickers/' | jq '{darsV: .object.daiars.selling_price, darsC: .object.daiars.purchase_price, dusdV: .object.daiusd.selling_price, dusdC: .object.daiusd.purchase_price }'"
+alias doco='docker-compose'
+alias docolt='docker-compose logs -ft'
+alias sc='jq ".scripts"'
+alias sc.='jq ".scripts" package.json'
 
 # User configuration
 
@@ -132,7 +147,24 @@ alias gss='git status -sb'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export PATH=/opt/homebrew/bin:$PATH
+export PATH=/Users/frank/installs/chroma-0.9.2-darwin-amd64/bin:$PATH
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:/Users/frank/installs/flutter/bin
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
