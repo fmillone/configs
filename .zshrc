@@ -83,71 +83,15 @@ plugins=(git colorize colored-man-pages zsh-autosuggestions zsh-syntax-highlight
 
 source $ZSH/oh-my-zsh.sh
 
-#DEFAULT_USER=frank;
-#prompt_tools_versions() {
-#  local NODE_VERSION=$(node -v)
-#  docker ps &>/dev/null ; local DOCKER_ACTIVE=$?
-#  if [ $DOCKER_ACTIVE -eq 0  ]; then 
-#    local DOCKER_STATUS='✓'
-#  else
-#    local DOCKER_STATUS='✘';
-#  fi
-#  prompt_segment 'green' '28m' " ⬢ ";
-#  prompt_segment 'green' 'black' "${NODE_VERSION}";
-#  prompt_segment 'blue' '' " Docker ${DOCKER_STATUS}"
-#}
+export EDITOR=nvim
+source ~/.config/shell/aliases.sh
+source ~/.config/shell/functions.sh
 
-#prompt_newline() {
-#  prompt_segment '' '' '\n';
-#}
+addToPathFront "/opt/homebrew/bin";
+addToPathFront "/Users/frank/installs/chroma-0.9.2-darwin-amd64/bin";
 
-#prompt_dir() {
-#  prompt_segment '240m' default ' %~ '
-#}
-
-#AGNOSTER_PROMPT_SEGMENTS=("prompt_tools_versions" "prompt_newline" "${AGNOSTER_PROMPT_SEGMENTS[@]}");
-export EDITOR=vim
-
-# Aliases
-alias gl='git --no-pager log --oneline'
-alias grom='git rebase origin/master'
-alias grod='git rebase origin/develop'
-alias nest='npx @nestjs/cli'
-alias gss='git status -sb'
-alias dai_price="curl 'https://be.buenbit.com/api/market/tickers/' | jq '{darsV: .object.daiars.selling_price, darsC: .object.daiars.purchase_price, dusdV: .object.daiusd.selling_price, dusdC: .object.daiusd.purchase_price }'"
-alias doco='docker-compose'
-alias docolt='docker-compose logs -ft'
-alias sc='jq ".scripts"'
-alias sc.='jq ".scripts" package.json'
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=/Users/frank/installs/chroma-0.9.2-darwin-amd64/bin:$PATH
+export DENO_INSTALL="$HOME/.deno"
+addToPathFront "$DENO_INSTALL/bin"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -155,12 +99,12 @@ export NVM_DIR="$HOME/.nvm"
 
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:/Users/frank/installs/flutter/bin
+addToPathFront "#ANDROID_HOME/cmdline-tools/latest/bin"
+addToPathFront "#ANDROID_HOME/emulator"
+addToPathFront "#ANDROID_HOME/tools"
+addToPathFront "#ANDROID_HOME/tools/bin"
+addToPathFront "#ANDROID_HOME/platform-tools"
+addToPathFront "#/Users/frank/installs/flutter/bin"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -168,3 +112,5 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+

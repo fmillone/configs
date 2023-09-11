@@ -1,0 +1,11 @@
+# Aliases
+alias gl='git --no-pager log --oneline'
+alias grom='git rebase origin/master'
+alias gron='git rebase origin/main'
+alias grod='git rebase origin/develop'
+alias nest='npx @nestjs/cli'
+alias gss='git status -sb'
+alias doco='docker-compose'
+alias docolt='docker-compose logs -ft'
+alias sc='jq ".scripts"'
+alias sc.='jq ".scripts" package.json'
