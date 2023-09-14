@@ -18,8 +18,8 @@ return {
         -- },
       },
       panel = {
-        enabled = true,
-        auto_refresh = true,
+        enabled = false,
+        -- auto_refresh = true,
         -- keymap = {
         -- jump_prev = "[[",
         -- jump_next = "]]",
@@ -53,6 +53,15 @@ return {
           copilot_cmp._on_insert_enter({})
         end
       end)
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      local cmp = require("cmp")
+      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+        { name = "copilot", keyword_length = 0, max_item_count = 5, group_index = 2 },
+      }))
     end,
   },
 }
