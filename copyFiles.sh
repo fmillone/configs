@@ -8,7 +8,7 @@ function copy_files() {
 
 function copy_dirs() {
 	for dir in $@; do
-		cp -r $dir .
+		rsync -rva --delete $dir .
 	done
 }
 

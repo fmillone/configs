@@ -233,143 +233,11 @@ plugins {
 // For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
 // Once these themes are defined, one of them should to be selected in the "theme" section of this file
 //
-themes {
-  one-half-dark {
-    fg 220 223 228
-    bg 40 44 52
-    black 27 29 35
-    red 227 63 76
-    green 152 195 121
-    yellow 229 192 123
-    blue 97 175 239
-    magenta 198 120 221
-    cyan 86 182 194
-    white 233 225 254
-    orange 216 133 76
-  }
-  everforest-light {
-    bg "#fff9e8"
-    fg "#5c6a72"
-    black "#5c6a72"
-    red "#f85552"
-    green "#8da101"
-    yellow "#dfa000"
-    blue "#3a94c5"
-    magenta "#df69ba"
-    cyan "#35a77c"
-    white "#dfddc8"
-    orange "#FF9E64"
-  }
-  everforest-dark {
-    bg "#2b3339"
-    fg "#d3c6aa"
-    black "#4b565c"
-    red "#e67e80"
-    green "#a7c080"
-    yellow "#dbbc7f"
-    blue "#7fbbb3"
-    magenta "#d699b6"
-    cyan "#83c092"
-    white "#d3c6aa"
-    orange "#FF9E64"
-  }
-  menace {
-    fg "#e3a555"
-    bg 40 42 54
-    red "#f74c17"
-    green 80 250 123
-    yellow 241 250 140
-    blue 98 114 164
-    magenta 255 121 198
-    orange 255 184 108
-    cyan 139 233 253
-    black "#04399d"
-    white 255 255 255
-  }
-  dracula {
-    fg 248 248 242
-    bg 40 42 54
-    black 0 0 0
-    red 255 85 85
-    green 80 250 123
-    yellow 241 250 140
-    blue 98 114 164
-    magenta 255 121 198
-    cyan 139 233 253
-    white 255 255 255
-    orange 255 184 108
- }
-  dayfox {
-    bg "#f6f2ee"
-    fg "#3d2b5a"
-    red "#a5222f"
-    green "#396847"
-    blue "#2848a9"
-    yellow "#ac5402"
-    magenta "#6e33ce"
-    orange "#955f61"
-    cyan "#287980"
-    black "#d3c7bb"
-    white "#643f61"
-  }
-  nightfox {
-    bg "#192330"
-    fg "#cdcecf"
-    red "#c94f6d"
-    green "#81b29a"
-    blue "#719cd6"
-    yellow "#dbc074"
-    magenta "#9d79d6"
-    orange "#f4a261"
-    cyan "#63cdcf"
-    black "#29394f"
-    white "#aeafb0"
-  }
-  terafox {
-    bg "#152528"
-    fg "#e6eaea"
-    red "#e85c51"
-    green "#7aa4a1"
-    blue "#5a93aa"
-    yellow "#fda47f"
-    magenta "#ad5c7c"
-    orange "#ff8349"
-    cyan "#a1cdd8"
-    black "#254147"
-    white "#cbd9d8"
-  }
-  kanagawa {
-        fg "#DCD7BA"
-        bg "#1F1F28"
-        red "#C34043"
-        green "#76946A"
-        yellow "#FF9E3B"
-        blue "#7E9CD8"
-        magenta "#957FB8"
-        orange "#FFA066"
-        cyan "#7FB4CA"
-        black "#16161D"
-        white "#DCD7BA"
-    }
-  alex35mil {
-    fg "#afb4c3"
-    bg "#272b30"
-    black "#272b30"
-    red "#cc6666"
-    green "#bdb968"
-    yellow "#f0c674"
-    blue "#81a2be"
-    magenta "#b294bb"
-    cyan "#7fb2c8"
-    white "#afb4c3"
-    orange "#de935f"
-  }
-}
 
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "one-half-dark"
+theme "carbonfox"
 
 // The name of the default layout to load on startup
 // Default: "default"
@@ -442,4 +310,4 @@ default_mode "locked"
 
 // The folder in which Zellij will look for themes
 //
-// theme_dir "/path/to/my/theme_dir"
+theme_dir "/Users/frank/.config/zellij/themes/"

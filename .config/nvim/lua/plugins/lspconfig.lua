@@ -1,3 +1,39 @@
+local function configure_rust(opts)
+  local myKeys = {
+    {
+      "K",
+      function()
+        require("rust-tools").hover_actions.hover_actions()
+      end,
+      desc = " my Hover actions",
+    },
+    {
+      "<leader>cR",
+      function()
+        require("rust-tools.code_action_group").code_action_group()
+      end,
+      desc = " my Code action group",
+    },
+    {
+      "<leader>dR",
+      function()
+        require("rust-tools.debuggables").debuggables()
+      end,
+      desc = " my Debuggables",
+    },
+    {
+      "<leader>dRu",
+      function()
+        require("rust-tools.runnables").runnables()
+      end,
+      desc = " my Runnbles",
+    },
+  }
+  local keys = vim.tbl_extend("force", opts.servers.rust_analyzer.keys, myKeys)
+  opts.servers.rust_analyzer.keys = keys
+  -- print(vim.print(keys))
+end
+
 return {
   "neovim/nvim-lspconfig",
   opts = {
@@ -150,5 +186,6 @@ return {
         return not is_deno_2(root_dir)
       end)
     end
+    configure_rust(opts)
   end,
 }

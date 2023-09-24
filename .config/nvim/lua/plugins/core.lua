@@ -7,6 +7,7 @@ return {
       toggle_style_list = { "deep", "darker" }, -- List of styles to toggle between
     },
   },
+  { "EdenEast/nightfox.nvim" },
   {
     "LazyVim/LazyVim",
     opts = {

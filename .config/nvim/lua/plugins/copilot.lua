@@ -4,34 +4,8 @@ return {
     cmd = "Copilot",
     build = ":Copilot auth",
     opts = {
-      suggestion = {
-        enabled = false,
-        auto_trigger = true,
-        debounce = 75,
-        -- keymap = {
-        -- accept = "<C-l>",
-        -- accept_word = false,
-        -- accept_line = false,
-        -- next = "<C-_>",
-        -- prev = "<M-[>",
-        -- dismiss = "<C-]>",
-        -- },
-      },
-      panel = {
-        enabled = false,
-        -- auto_refresh = true,
-        -- keymap = {
-        -- jump_prev = "[[",
-        -- jump_next = "]]",
-        --     accept = "<CR>",
-        --     refresh = "gr",
-        -- open = "<C-l>",
-        -- },
-        -- layout = {
-        -- position = "bottom", -- | top | left | right
-        --     ratio = 0.4,
-        --   },
-      },
+      suggestion = { enabled = false },
+      panel = { enabled = false },
       filetypes = {
         markdown = true,
         help = true,
@@ -60,7 +34,7 @@ return {
     opts = function(_, opts)
       local cmp = require("cmp")
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "copilot", keyword_length = 0, max_item_count = 5, group_index = 2 },
+        { name = "copilot", keyword_length = 1, max_item_count = 5, group_index = 2 },
       }))
     end,
   },
