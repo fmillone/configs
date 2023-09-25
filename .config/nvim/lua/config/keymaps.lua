@@ -41,3 +41,6 @@ vim.keymap.set(
   "<cmd>Gitsigns toggle_deleted<CR>",
   { silent = true, noremap = true, desc = "toggle deleted" }
 )
+vim.keymap.set({ "n", "x" }, "<leader>rr", function()
+  require("refactoring").select_refactor()
+end, { desc = "Refactor" })
