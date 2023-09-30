@@ -104,7 +104,7 @@ addToPathFront "#ANDROID_HOME/emulator"
 addToPathFront "#ANDROID_HOME/tools"
 addToPathFront "#ANDROID_HOME/tools/bin"
 addToPathFront "#ANDROID_HOME/platform-tools"
-addToPathFront "#/Users/frank/installs/flutter/bin"
+addToPathFront "/Users/frank/installs/flutter/bin"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

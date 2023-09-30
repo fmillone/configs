@@ -14,7 +14,7 @@ return {
     opts = function(_, opts)
       local cmp = require("cmp")
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "codeium", keyword_length = 1, max_item_count = 5, group_index = 2 },
+        { name = "codeium", keyword_length = 0, max_item_count = 5, group_index = 2 },
       }))
     end,
   },
