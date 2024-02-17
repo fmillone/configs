@@ -21,5 +21,5 @@ copy_files ~/.zshrc ~/.p10k.zsh
 
 echo copying dirs
 cd .config
-copy_dirs ~/.config/shell ~/.config/nvim ~/.config/zellij
+copy_dirs ~/.config/shell ~/.config/nvim ~/.config/zellij ~/.config/kitty
 cd ..

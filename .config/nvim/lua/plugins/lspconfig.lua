@@ -1,3 +1,57 @@
+if true then
+  return {
+    "neovim/nvim-lspconfig",
+    opts = {
+      format_notify = true,
+      servers = {
+        rust_analyzer = {
+          keys = {
+            {
+              "K",
+              function()
+                require("rust-tools").hover_actions.hover_actions()
+              end,
+              desc = "Hover Actions (Rust)",
+            },
+            {
+              "<leader>cR",
+              function()
+                require("rust-tools.code_action_group").code_action_group()
+              end,
+              desc = "Code Action (Rust)",
+            },
+            {
+              "<leader>dr",
+              function()
+                require("rust-tools.debuggables").debuggables()
+              end,
+              desc = "Run Debuggables (Rust)",
+            },
+            {
+              "<leader>che",
+              function()
+                require("rust-tools").inlay_hints.enable()
+              end,
+              desc = "Enable Inlay Hints (Rust)",
+            },
+            {
+              "<leader>chd",
+              function()
+                require("rust-tools").inlay_hints.disable()
+              end,
+              desc = "Disable Inlay Hints (Rust)",
+            },
+          },
+        },
+      },
+    },
+  }
+end
+
+if true then
+  return {}
+end
+
 local function configure_rust(opts)
   local myKeys = {
     {
@@ -159,33 +213,50 @@ return {
       mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
     end
 
+    local lsp_util = require("lspconfig.util")
     if Util.lsp_get_config("denols") and Util.lsp_get_config("tsserver") then
-      local lsp_util = require("lspconfig.util")
-      local function is_deno_2(root_dir)
+      local function is_deno(root_dir)
         local is_deno_project = lsp_util.root_pattern("deno.json", "deno.jsonc")
         local is_vscode = lsp_util.root_pattern(".vscode/settings.json")
 
         local deno = is_deno_project(root_dir)
+        vim.print("is deno project" .. root_dir .. " " .. deno)
         if deno then
           return deno
         else
           local vscode = is_vscode(root_dir)
           if vscode then
+            vim.print("is vscode project" .. root_dir)
             local settings = io.open(root_dir .. "/.vscode/settings.json", "r")
+            if not settings then
+              return
+            end
             local cfg = vim.json.decode(settings.read(settings, "*a"))
             if cfg and cfg["deno.enable"] then
+              vim.print("is deno/vscode project" .. root_dir .. "" .. vscode)
               return vscode
             end
           end
         end
       end
 
-      local is_deno = lsp_util.root_pattern("deno.json", "deno.jsonc")
-      Util.lsp_disable("tsserver", is_deno_2)
+      Util.lsp_disable("tsserver", function(root_dir)
+        vim.print("disabling tsserver? " .. root_dir .. " " .. is_deno(root_dir))
+        return is_deno(root_dir)
+      end)
       Util.lsp_disable("denols", function(root_dir)
-        return not is_deno_2(root_dir)
+        local is_deno_p = is_deno(root_dir)
+        vim.print("disabling denols? " .. root_dir .. " " .. is_deno_p)
+        return not is_deno_p
       end)
     end
+    Util.lsp_disable("denols", function(root_dir)
+      local is_deno_p = lsp_util.root_pattern("deno.json", "deno.jsonc")(root_dir)
+      vim.print("disabling denols (global)? " .. root_dir .. " " .. is_deno_p)
+
+      return not is_deno_p
+    end)
+    -- configure_deno(opts)
     configure_rust(opts)
   end,
 }
