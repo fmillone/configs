@@ -86,9 +86,11 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR=nvim
 source ~/.config/shell/aliases.sh
 source ~/.config/shell/functions.sh
+local INSTALLS="$HOME/installs"
 
 addToPathFront "/opt/homebrew/bin";
-addToPathFront "/Users/frank/installs/chroma-0.9.2-darwin-amd64/bin";
+# addToPathFront "$INSTALLS/chroma-0.9.2-darwin-amd64/bin";
+addToPathFront "$INSTALLS/chroma-2.12.0";
 
 export DENO_INSTALL="$HOME/.deno"
 addToPathFront "$DENO_INSTALL/bin"
@@ -97,14 +99,13 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
 export ANDROID_HOME=$HOME/Library/Android/sdk
-addToPathFront "#ANDROID_HOME/cmdline-tools/latest/bin"
-addToPathFront "#ANDROID_HOME/emulator"
-addToPathFront "#ANDROID_HOME/tools"
-addToPathFront "#ANDROID_HOME/tools/bin"
-addToPathFront "#ANDROID_HOME/platform-tools"
-addToPathFront "/Users/frank/installs/flutter/bin"
+addToPathFront "$ANDROID_HOME/cmdline-tools/latest/bin"
+addToPathFront "$ANDROID_HOME/emulator"
+addToPathFront "$ANDROID_HOME/tools"
+addToPathFront "$ANDROID_HOME/tools/bin"
+addToPathFront "$ANDROID_HOME/platform-tools"
+addToPathFront "$INSTALLS/flutter/bin"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

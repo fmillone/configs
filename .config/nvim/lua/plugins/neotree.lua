@@ -7,6 +7,9 @@ return {
           ".gitignore",
           ".config",
         },
+        always_show_by_pattern = {
+          ".config*",
+        },
       },
     },
   },
