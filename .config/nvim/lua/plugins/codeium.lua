@@ -1,21 +1,14 @@
 return {
   {
-    "Exafunction/codeium.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = function()
-      require("codeium").setup({})
-    end,
-  },
-  {
-    "hrsh7th/nvim-cmp",
+    "nvim-cmp",
     opts = function(_, opts)
-      local cmp = require("cmp")
-      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "codeium", keyword_length = 0, max_item_count = 5, group_index = 2 },
-      }))
+      table.insert(opts.sources, {
+        name = "codeium",
+        group_index = 2,
+        keyword_length = 0,
+        max_item_count = 3,
+        priority = 10,
+      })
     end,
   },
 }
