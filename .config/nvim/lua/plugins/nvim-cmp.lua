@@ -7,6 +7,7 @@ return {
   event = "InsertEnter",
   opts = function(_, opts)
     local cmp = require("cmp")
+    -- opts.completion.completeopt = opts.completion.completeopt .. ",noselect"
     opts.mapping = cmp.mapping.preset.insert({
       ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
       ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -23,6 +24,7 @@ return {
         cmp.abort()
         fallback()
       end,
+      ["<esc>"] = cmp.mapping(cmp.mapping.abort(), { "i" }),
     })
   end,
 }
