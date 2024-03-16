@@ -12,16 +12,4 @@ return {
       "skiprtp",
     },
   },
-  -- stylua: ignore
-  keys = {
-    {
-      "<leader>qs",
-      function()
-        -- require("neo-tree.command").execute({ action = "close" })
-        require("persistence").load()
-        -- require("neo-tree.command").execute({ action = "show" })
-      end,
-      desc = "Restore Session"
-    },
-  },
 }
