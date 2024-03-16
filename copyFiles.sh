@@ -17,9 +17,12 @@ if [[ ! -d ".config" ]]; then
 fi
 
 echo copying files
-copy_files ~/.zshrc ~/.p10k.zsh
+copy_files ~/.zshrc ~/.p10k.zsh ~/.tmux.conf
 
 echo copying dirs
 cd .config
-copy_dirs ~/.config/shell ~/.config/nvim ~/.config/zellij ~/.config/kitty
+copy_dirs ~/.config/shell \
+	~/.config/nvim \
+	~/.config/zellij \
+	~/.config/kitty
 cd ..
