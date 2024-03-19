@@ -8,7 +8,7 @@ function copy_files() {
 
 function copy_dirs() {
 	for dir in $@; do
-		rsync -rva --delete $dir .
+		rsync -rva --delete --exclude ".git" --exclude ".github" $dir .
 	done
 }
 
@@ -25,4 +25,5 @@ copy_dirs ~/.config/shell \
 	~/.config/nvim \
 	~/.config/zellij \
 	~/.config/kitty
+# ~/.config/nvim.kickstart
 cd ..
