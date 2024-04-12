@@ -89,8 +89,6 @@ source ~/.config/shell/functions.sh
 local INSTALLS="$HOME/installs"
 
 addToPathFront "/opt/homebrew/bin";
-# addToPathFront "$INSTALLS/chroma-0.9.2-darwin-amd64/bin";
-addToPathFront "$INSTALLS/chroma-2.12.0";
 
 export DENO_INSTALL="$HOME/.deno"
 addToPathFront "$DENO_INSTALL/bin"
