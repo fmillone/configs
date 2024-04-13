@@ -190,7 +190,7 @@ return {
             root = 'deno.json',
             exclude = 'package.json',
           },
-          filetypes = { 'typescript', 'javascript' },
+          filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' },
         },
         lua_ls = {
           -- cmd = {...},
