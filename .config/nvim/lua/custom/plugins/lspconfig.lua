@@ -272,7 +272,8 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'hadolint', -- Used to lint Dockerfiles
-        'shfmt',
+        'shfmt', -- shell
+        'markdownlint', -- markdown
         'shellcheck', -- Used to lint shell scripts
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }

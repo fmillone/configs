@@ -10,6 +10,7 @@
 * [X] fix copilot & codeium cmp
 * [ ] split mason configuration to allow one config file per language
 * [ ] split lspconfig to allow one config file per language
+* [X] add akinsho/git-conflict.nvim
 
 ### from navigator.lua
 
@@ -23,7 +24,7 @@
 * [X] Configure for Node.js
 * [ ] Configure for Rust
 * [ ] Configure for Go
-* [ ] Configure fresh?
+* [ ] Configure fresh? (need to wait for a new deno release that fixes JSX any issue)
 * [X] Configure docker
 * [X] Configure json
 * [X] Configure markdown
