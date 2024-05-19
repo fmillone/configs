@@ -13,7 +13,7 @@ addToPathFront() {
 }
 
 gro() {
-	git rebase origin/$1
+	git rebase origin/"$1"
 }
 
 setAwsEnv() {
@@ -23,7 +23,7 @@ setAwsEnv() {
 	fi
 	# check if the profile exists
 	if aws configure list-profiles | grep -q "^$1$"; then
-		export AWS_REGION=$(aws configure get region --profile $1)
+		export AWS_REGION=$(aws configure get region --profile "$1")
 		export AWS_PROFILE=$1
 		echo "Now using AWS_PROFILE=$AWS_PROFILE and AWS_REGION=$AWS_REGION"
 	else
@@ -36,4 +36,26 @@ unsetAwsEnv() {
 	unset AWS_REGION
 	unset AWS_PROFILE
 	echo "AWS_PROFILE and AWS_REGION unset"
+}
+
+strToJson() {
+  read -r string;
+  echo "$string" | sed 's/\\"/"/g' | sed 's/^"//g' | sed 's/"$//g';
+}
+
+getSecretByArn() {
+  # if arn is in params use it else read from stdin
+  local arn=""
+  if [ "$1" ]; then
+    arn="$1";
+  else
+    read -r arn;
+  fi
+  aws secretsmanager get-secret-value --secret-id "$arn" | \
+    jq ".SecretString" | \
+    strToJson
+}
+
+seckgrep() {
+  getSecretByArn "$1" | jq  "[ to_entries[] |select(.key| test(\"$2\")) ] | from_entries "
 }

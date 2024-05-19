@@ -37,7 +37,6 @@ layout {
                 mode_tmux   "#[fg=#000000,bg=#ffc387,bold] {name} #[fg=#4E4E4E,bg=#ffc387]"
                 mode_default_to_mode "resize"
             }
-
         }
         children
         pane size=1 borderless=true {

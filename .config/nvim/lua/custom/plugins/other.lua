@@ -1,7 +1,16 @@
 return {
   { 'tpope/vim-sleuth' },
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  {
+    'numToStr/Comment.nvim',
+    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    opts = function(_, opts)
+      local ret = opts or {}
+      ret.pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
+      return ret
+    end,
+  },
+  { 'JoosepAlviste/nvim-ts-context-commentstring' },
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   { -- Useful plugin to show you pending keybinds.
@@ -60,5 +69,9 @@ return {
       -- stylua: ignore
       { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
     },
+  },
+  {
+    'windwp/nvim-ts-autotag',
+    opts = {},
   },
 }
