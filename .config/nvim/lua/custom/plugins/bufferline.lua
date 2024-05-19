@@ -1,7 +1,8 @@
 return {
   {
     'akinsho/bufferline.nvim',
-    version = '*',
+    --version = '*',
+    branch = 'main',
     -- event = 'VeryLazy',
     dependencies = 'nvim-tree/nvim-web-devicons',
     opts = {

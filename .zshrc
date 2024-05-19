@@ -90,6 +90,7 @@ local INSTALLS="$HOME/installs"
 
 addToPathFront "/opt/homebrew/bin";
 addToPathFront "/opt/homebrew/opt/curl/bin"
+addToPathFront "$INSTALLS/nvim-macos-arm64/bin"
 
 export DENO_INSTALL="$HOME/.deno"
 addToPathFront "$DENO_INSTALL/bin"
