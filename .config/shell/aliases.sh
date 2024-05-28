@@ -1,4 +1,5 @@
 # Aliases
+alias ls='ls --color'
 alias gl='git --no-pager log --oneline'
 alias grom='git rebase origin/master'
 alias gron='git rebase origin/main'
