@@ -15,8 +15,17 @@ fi
 if [[ -f "/opt/homebrew/bin/brew" ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
 
 source "${ZINIT_HOME}/zinit.zsh"
+
+if [[ ! -f "$ZSH_CACHE_DIR/completions" ]]; then
+  mkdir -p "$ZSH_CACHE_DIR/completions"
+fi
+FPATH="$ZSH_CACHE_DIR/completions:$FPATH"
+
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
@@ -24,7 +33,10 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-# zinit light Aloxaf/fzf-tab
+
+zinit snippet OMZ::lib/key-bindings.zsh
+zinit snippet OMZ::lib/completion.zsh
+zinit light Aloxaf/fzf-tab
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -35,29 +47,18 @@ zinit snippet OMZP::colorize
 zinit snippet OMZP::colored-man-pages
 zinit snippet OMZP::docker-compose
 zinit snippet OMZP::extract
-# zinit snippet OMZP::docker #FIXME: directory not found
-# zinit snippet OMZP::deno #FIXME: directory not found
-# zinit snippet OMZP::rust  #FIXME: directory not found
+zinit snippet OMZP::common-aliases
+zinit snippet OMZP::docker
+zinit snippet OMZP::deno
+zinit snippet OMZP::rust
 
 # Load completions
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-
-OS=$(uname -s)
-if [ "$OS" = "Darwin" ]; then
-    bindkey '^[[A' history-beginning-search-backward
-    bindkey '^[[B' history-beginning-search-forward
-elif [ "$OS" = "Linux" ]; then
-    # https://superuser.com/a/1296543
-    # key dict is defined in /etc/zsh/zshrc
-    bindkey "$key[Up]" history-search-backward
-    bindkey "$key[Down]" history-search-forward
-fi
-
 # History
-HISTSIZE=5000
+HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
@@ -73,11 +74,23 @@ setopt hist_find_no_dups
 eval "$(fzf --zsh)"
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # zstyle ':completion:*' menu no
 # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons $realpath'
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
 ## My environment setup
 
 export EDITOR=nvim

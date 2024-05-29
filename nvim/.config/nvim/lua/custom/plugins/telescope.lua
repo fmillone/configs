@@ -62,10 +62,23 @@ return {
             n = { ['<c-t>'] = open_with_trouble },
           },
         },
-        -- pickers = {}
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
+          },
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+            follow = true,
+            find_command = { 'fd', '--type', 'f', '--hidden', '--follow' },
+          },
+          live_grep = {
+            additional_args = { '--hidden', '--follow' },
+            glob_pattern = { '!.git/' },
+          },
+          grep_string = {
+            additional_args = { '--hidden', '--follow' },
           },
         },
       }
