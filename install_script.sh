@@ -1,5 +1,4 @@
-
-packages=("$@") 
+packages=("$@")
 for package in "${packages[@]}"; do
   echo "Stowing $package"
   stow -nv --adopt -t "$HOME" "$package" || exit 1
@@ -14,5 +13,8 @@ fi
 
 for package in "${packages[@]}"; do
   stow -v --adopt -t "$HOME" "$package" || exit 1
+  if [ -f "$package/installscript.sh" ]; then
+    echo "Running postinstall.sh for $package"
+    bash "$package/installscript.sh" || exit 1
+  fi
 done
-
