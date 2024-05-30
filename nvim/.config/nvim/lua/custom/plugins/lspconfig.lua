@@ -268,6 +268,7 @@ return {
           },
         },
         bashls = {},
+        eslint = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -287,6 +288,7 @@ return {
         'shfmt', -- shell
         'markdownlint', -- markdown
         'shellcheck', -- Used to lint shell scripts
+        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
