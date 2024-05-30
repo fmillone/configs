@@ -43,4 +43,4 @@ else
 fi
 alias l.="ls -ld .*"
 
-alias check_tools="check_installed git lazygit zellij tmux vim nvim aws eza jq tldr fd rg fzf tree"
+alias check_tools="check_installed git lazygit chroma zellij tmux vim nvim aws eza jq tldr fd rg fzf tree"
