@@ -43,4 +43,8 @@ else
 fi
 alias l.="ls -ld .*"
 
+if type fzf >/dev/null && type fd >/dev/null; then
+  alias cdf='cd $(fd --type d | fzf)'
+fi
+
 alias check_tools="check_installed git lazygit chroma zellij tmux vim nvim aws eza jq tldr fd rg fzf tree"

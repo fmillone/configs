@@ -1,9 +1,6 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
   
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -26,8 +23,12 @@ if [[ ! -f "$ZSH_CACHE_DIR/completions" ]]; then
 fi
 FPATH="$ZSH_CACHE_DIR/completions:$FPATH"
 
-# Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+#
+# Add in starship
+zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+zinit light starship/starship
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -42,6 +43,7 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::aws
+aws_prompt_info(){} # Disable the AWS prompt
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colorize
 zinit snippet OMZP::colored-man-pages
@@ -98,8 +100,10 @@ source ~/.config/shell/aliases.sh
 source ~/.config/shell/functions.sh
 local INSTALLS="$HOME/installs"
 
-addToPathFront "/opt/homebrew/opt/curl/bin"
-addToPathFront "$INSTALLS/nvim-macos-arm64/bin"
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  addToPathFront "/opt/homebrew/opt/curl/bin"
+  addToPathFront "$INSTALLS/nvim-macos-arm64/bin"
+fi
 addToPathFront "$INSTALLS/bin"
 
 export DENO_INSTALL="$HOME/.deno"
@@ -121,6 +125,3 @@ addToPathFront "$INSTALLS/flutter/bin"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
