@@ -1,0 +1,241 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](color_orange)\
+$os\
+$username\
+[](bg:path_color fg:color_orange)\
+$directory\
+[](fg:path_color bg:color_aqua)\
+$git_branch\
+[](fg:color_aqua bg:color_blue)\
+$git_status\
+$git_state\
+[](fg:color_blue bg:color_bg1)\
+$docker_context\
+$conda\
+[ ](fg:color_bg1)\
+$line_break$character"""
+
+right_format = """
+[](fg:color_bg1)\
+$cmd_duration\
+[](fg:color_bg1)\
+$sudo\
+$azure\
+$gcloud\
+$aws\
+$terraform\
+$deno\
+$c\
+$rust\
+$golang\
+$nodejs\
+$php\
+$dart\
+$java\
+$kotlin\
+$haskell\
+$python\
+[ ](fg:color_bg1)\
+$time\
+$battery\
+[ ]()\
+[](bg:color_bg1 fg:black)\
+[](fg:color_bg1)\
+"""
+
+palette = 'p10k'
+
+[palettes.p10k]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
+path_color = '#3B76F0'
+
+[os]
+disabled = false
+format = "[$symbol ]($style)"
+style = "bg:color_orange fg:color_fg0"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+[username]
+show_always = false
+style_user = "bg:color_orange fg:color_fg0"
+style_root = "bg:color_orange fg:color_fg0"
+format = '[ $user ]($style)'
+
+[directory]
+style = "fg:color_fg0 bg:path_color"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncate_to_repo = false
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"repo" = "󰲋"
+
+[git_branch]
+symbol = ""
+style = "bg:color_aqua"
+format = '[[ $symbol $branch(:$remote_branch) ](fg:color_fg0 bg:color_aqua)]($style)'
+
+[git_status]
+style = "bg:color_blue fg:color_bg1 bold"
+format = """
+[(\
+[ ](fg:color_blue bg:yellow)\
+$all_status \
+[](fg:color_blue bg:yellow)\
+)](bg:yellow fg:bold black)\
+[(\
+$ahead_behind\
+)](bg:color_blue fg:bold white)\
+"""
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
+conflicted='[ C ](bg:color_red fg:bold white)'
+up_to_date=''
+untracked='?'
+stashed=''
+modified='!'
+staged='!'
+renamed='!'
+deleted='!'
+typechanged="T"
+
+[git_state]
+style = "bg:black fg:bold color_blue"
+format = '[ ]($style)[$state( $progress_current/$progress_total)](fg:bold color_red)[ ]($style)'
+
+[cmd_duration]
+format = "[  $duration ]($style)"
+style = "fg:bold yellow bg:color_bg1"
+
+[aws]
+style = "bg:color_red fg:bold white"
+symbol = " "
+format ='[](fg:color_red)[$symbol ($profile )(\($region\) )(\[$duration\] )]($style)[](fg:color_red)'
+force_display = false
+
+[nodejs]
+symbol = ""
+style = "fg:green"
+detect_extensions = []
+format = '[ $symbol( $version) ]($style)'
+
+[deno]
+style = "fg:color_fg0"
+format = '[ $symbol($version) ]($style)'
+
+[c]
+symbol = " "
+style = "fg:color_blue"
+format = '[ $symbol( $version) ]($style)'
+
+[rust]
+symbol = "🦀"
+style = "fg:bold color_orange"
+format = '[ $symbol( $version) ]($style)'
+
+[dart]
+symbol = "🎯" 
+style = "fg:blue"
+format = '[ $symbol( $version) ]($style)'
+
+[golang]
+symbol = ""
+style = "fg:bold cyan"
+format = '[ $symbol( $version) ]($style)'
+
+[php]
+symbol = ""
+style = "fg:color_blue"
+format = '[ $symbol( $version) ]($style)'
+
+[java]
+symbol = " "
+style = "fg:color_red"
+format = '[ $symbol( $version) ]($style)'
+
+[kotlin]
+symbol = ""
+style = "fg:color_purple"
+format = '[ $symbol( $version) ]($style)'
+
+[python]
+symbol = ""
+style = "fg:color_aqua"
+format = '[ $symbol( ([$virtualenv:](bg:color_aqua fg:black) )$version) ]($style)'
+
+[docker_context]
+symbol = ""
+style = "bg:color_bg1"
+format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg1)]($style)'
+
+[conda]
+style = "bg:color_bg1"
+format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg1)]($style)'
+
+[time]
+disabled = true
+time_format = "%R"
+style = "bg:color_bg1"
+format = '[](fg:color_bg1)[  $time ]($style)[ ](fg:color_bg1)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[󰅂](bold fg:green)'
+error_symbol = '[󰅂](bold fg:color_red)'
+vimcmd_symbol = '[󰅁](bold fg:green)'
+vimcmd_replace_one_symbol = '[󰅁](bold fg:color_purple)'
+vimcmd_replace_symbol = '[󰅁](bold fg:color_purple)'
+vimcmd_visual_symbol = '[󰅁](bold fg:color_yellow)'
+
+[battery]
+format = "[$symbol$percentage](fg:$style)"
+
+[[battery.display]]
+threshold = 15
+style = "bold red"
+
+[[battery.display]]
+threshold = 60
+style = "bold color_yellow"
+
+[[battery.display]]
+threshold = 100
+style = "green"
