@@ -1,3 +1,12 @@
+local function js_formatter()
+  -- TODO: only use prettier if project has a prettier config
+  if vim.fn.glob 'deno.json' ~= '' then
+    return { 'deno fmt' }
+  else
+    return { 'prettier' }
+  end
+end
+
 return {
   { -- Autoformat
     'stevearc/conform.nvim',
@@ -18,11 +27,11 @@ return {
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
-        ['javascript'] = { 'prettier' },
-        ['javascriptreact'] = { 'prettier' },
-        ['typescript'] = { 'prettier' },
-        ['typescriptreact'] = { 'prettier' },
-        ['vue'] = { 'prettier' },
+        ['javascript'] = js_formatter,
+        ['javascriptreact'] = js_formatter,
+        ['typescript'] = js_formatter,
+        ['typescriptreact'] = js_formatter,
+        ['vue'] = js_formatter,
         ['css'] = { 'prettier' },
         ['scss'] = { 'prettier' },
         ['less'] = { 'prettier' },

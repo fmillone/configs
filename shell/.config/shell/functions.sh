@@ -73,3 +73,7 @@ check_installed() {
   done
   return $result
 }
+
+cdf() {
+  cd "$(fd --type d --hidden | fzf --query="$1")" || exit
+}
