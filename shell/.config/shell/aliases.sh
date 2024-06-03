@@ -1,15 +1,6 @@
 # Aliases
-unalias rm
-unalias cp
-unalias mv
-
-unalias l
-unalias lS
-unalias lart
-unalias lr
-unalias lrt
-unalias lsn
-unalias lsr
+unalias rm cp mv >/dev/null 2>/dev/null
+unalias l lS lart lr lrt lsn lsr >/dev/null 2>/dev/null
 
 alias gl='git --no-pager log --oneline'
 alias grom='git rebase origin/master'
@@ -47,4 +38,8 @@ if type stow >/dev/null; then
   alias stow='stow -t ~'
 fi
 
-alias check_tools="check_installed git lazygit chroma zellij tmux vim nvim aws eza jq tldr fd rg fzf tree"
+if type fdfind >/dev/null; then
+  alias fd="fdfind"
+fi
+
+alias check_tools="check_installed git lazygit chroma zellij tmux starship vim nvim aws eza jq tldr fd rg fzf tree"
