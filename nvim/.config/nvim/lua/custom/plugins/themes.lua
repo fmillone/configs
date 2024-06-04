@@ -1,5 +1,5 @@
 local function set_colorscheme()
-  if vim.fn.has 'macunix' then
+  if vim.fn.has 'macunix' ~= 0 then
     vim.cmd.colorscheme 'tokyonight-night'
   else
     vim.cmd.colorscheme 'onedark'
