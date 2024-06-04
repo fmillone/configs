@@ -117,8 +117,8 @@ format = """
 $all_status \
 [](fg:color_blue bg:yellow)\
 )](bg:yellow fg:bold black)\
-[(\
-$ahead_behind\
+[( \
+$ahead_behind \
 )](bg:color_blue fg:bold white)\
 """
 ahead = '⇡${count}'
