@@ -21,7 +21,7 @@ alias lg='lazygit'
 if which eza >/dev/null; then
   alias ls="eza --icons --group-directories-first"
   alias ll="eza --icons --group-directories-first -l"
-  alias la="eza --icons -lgha --group-directories-first"
+  alias la="eza --icons -lghaa --group-directories-first"
   alias lt="eza --icons --tree"
   alias lta="eza --icons --tree -a"
 else

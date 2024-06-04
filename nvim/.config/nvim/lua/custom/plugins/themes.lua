@@ -3,6 +3,7 @@ local function set_colorscheme()
     vim.cmd.colorscheme 'tokyonight-night'
   else
     vim.cmd.colorscheme 'onedark'
+    vim.api.nvim_set_hl(0, 'Normal', { bg = '#1f1f1f' })
   end
 end
 
