@@ -168,6 +168,14 @@ keybinds {
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
     }
+    shared_except "locked" "tmux" {
+        bind "Alt f" {
+            LaunchPlugin "filepicker" {
+                floating true
+                close_on_selection true
+            };
+        }
+    }
     shared_except "normal" "locked" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
     }
