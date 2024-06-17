@@ -1,6 +1,6 @@
 # Aliases
 unalias rm cp mv >/dev/null 2>/dev/null
-unalias l lS lart lr lrt lsn lsr >/dev/null 2>/dev/null
+unalias l lS lart lr lrt lsn lsr fd ff >/dev/null 2>/dev/null
 
 alias gl='git --no-pager log --oneline'
 alias grom='git rebase origin/master'
@@ -41,5 +41,8 @@ fi
 if type fdfind >/dev/null; then
   alias fd="fdfind"
 fi
+# TODO:
+# alias fdd= fd find dirs
+# alias fdf= fd find files
 
 alias check_tools="check_installed git lazygit chroma zellij tmux starship vim nvim aws eza jq tldr fd rg fzf tree"
