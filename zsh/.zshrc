@@ -98,6 +98,7 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 export EDITOR=nvim
 source ~/.config/shell/aliases.sh
 source ~/.config/shell/functions.sh
+source ~/.config/shell/env_vars.sh
 local INSTALLS="$HOME/installs"
 
 if [[ -f "/opt/homebrew/bin/brew" ]] then
