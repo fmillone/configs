@@ -54,6 +54,14 @@ zinit snippet OMZP::docker
 zinit snippet OMZP::deno
 zinit snippet OMZP::rust
 
+source ~/.config/shell/aliases.sh
+source ~/.config/shell/functions.sh
+source ~/.config/shell/env_vars.sh
+
+if check_installed 'zellij' >/dev/null; then 
+  zellij setup --generate-completion zsh > "$HOME/.cache/zinit/completions/_zellij":
+fi
+
 # Load completions
 autoload -Uz compinit && compinit
 
@@ -77,9 +85,7 @@ eval "$(fzf --zsh)"
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# zstyle ':completion:*' menu no
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':completion:*' list-colors "${(s.:.)EZA_COLORS}"
 # zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # disable sort when completing `git checkout`
@@ -96,9 +102,6 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 ## My environment setup
 
 export EDITOR=nvim
-source ~/.config/shell/aliases.sh
-source ~/.config/shell/functions.sh
-source ~/.config/shell/env_vars.sh
 local INSTALLS="$HOME/installs"
 
 if [[ -f "/opt/homebrew/bin/brew" ]] then
