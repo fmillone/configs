@@ -153,7 +153,7 @@ return {
                 vim.lsp.buf.code_action {
                   apply = true,
                   context = {
-                    only = { 'source.organizeImports.ts' },
+                    only = { 'source.organizeImports' },
                     diagnostics = {},
                   },
                 }
@@ -289,10 +289,12 @@ return {
         'markdownlint', -- markdown
         'shellcheck', -- Used to lint shell scripts
         'prettier',
+        'codelldb',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
+        PATH = 'append',
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}

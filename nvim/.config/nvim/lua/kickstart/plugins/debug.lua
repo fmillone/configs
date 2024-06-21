@@ -20,7 +20,10 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
-
+    {
+      'theHamsta/nvim-dap-virtual-text',
+      opts = {},
+    },
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
   },
@@ -35,13 +38,18 @@ return {
 
       -- You can provide additional configuration to the handlers,
       -- see mason-nvim-dap README for more information
-      handlers = {},
+      handlers = {
+        function(config)
+          require('mason-nvim-dap').default_setup(config)
+        end,
+      },
 
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'codelldb',
       },
     }
 
@@ -74,6 +82,21 @@ return {
           terminate = '⏹',
           disconnect = '⏏',
         },
+      },
+    }
+
+    dap.configurations.rust = {
+      {
+        type = 'lldb',
+        request = 'launch',
+        name = 'Debug',
+        program = function()
+          return vim.fn.input 'Path to executable: '
+        end,
+        args = {},
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        runInTerminal = false,
       },
     }
 
