@@ -2,8 +2,12 @@ local function js_formatter()
   -- TODO: only use prettier if project has a prettier config
   if vim.fn.glob 'deno.json' ~= '' then
     return { 'deno fmt' }
-  else
+  elseif vim.fn.glob '.prettierrc' ~= '' then
     return { 'prettier' }
+  elseif vim.fn.glob 'biome.json' ~= '' then
+    return { 'biome' }
+  else
+    return { 'prettier' } -- TODO: eslind_d biome ?
   end
 end
 

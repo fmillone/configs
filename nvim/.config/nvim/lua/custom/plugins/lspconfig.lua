@@ -190,6 +190,16 @@ return {
           filetypes_include = {},
           -- to fully override the default_config, change the below
           -- filetypes = {}
+          root_pattern = {
+            'tailwind.config.js',
+            'tailwind.config.cjs',
+            'tailwind.config.mjs',
+            'tailwind.config.ts',
+            'postcss.config.js',
+            'postcss.config.cjs',
+            'postcss.config.mjs',
+            'postcss.config.ts',
+          },
         },
 
         denols = {
@@ -269,6 +279,7 @@ return {
         },
         bashls = {},
         eslint = {},
+        biome = {},
       }
 
       -- Ensure the servers and tools above are installed
