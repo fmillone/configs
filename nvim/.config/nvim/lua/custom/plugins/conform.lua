@@ -1,5 +1,5 @@
 local function js_formatter()
-  if vim.fn.glob 'dprint.json' then
+  if vim.fn.glob 'dprint.json' ~= '' then
     return { 'dprint' }
   elseif vim.fn.glob 'deno.json' ~= '' then
     return { 'deno fmt' }
