@@ -1,13 +1,12 @@
 local function js_formatter()
-  -- TODO: only use prettier if project has a prettier config
-  if vim.fn.glob 'deno.json' ~= '' then
+  if vim.fn.glob 'dprint.json' then
+    return { 'dprint' }
+  elseif vim.fn.glob 'deno.json' ~= '' then
     return { 'deno fmt' }
   elseif vim.fn.glob '.prettierrc' ~= '' then
     return { 'prettier' }
   elseif vim.fn.glob 'biome.json' ~= '' then
     return { 'biome' }
-  else
-    return { 'prettier' } -- TODO: eslind_d biome ?
   end
 end
 
@@ -31,22 +30,15 @@ return {
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
-        ['javascript'] = js_formatter,
-        ['javascriptreact'] = js_formatter,
-        ['typescript'] = js_formatter,
-        ['typescriptreact'] = js_formatter,
-        ['vue'] = js_formatter,
-        ['css'] = { 'prettier' },
-        ['scss'] = { 'prettier' },
-        ['less'] = { 'prettier' },
-        ['html'] = { 'prettier' },
-        ['json'] = { 'prettier' },
-        ['jsonc'] = { 'prettier' },
-        ['yaml'] = { 'prettier' },
-        ['markdown'] = { 'prettier' },
-        ['markdown.mdx'] = { 'prettier' },
-        ['graphql'] = { 'prettier' },
-        ['handlebars'] = { 'prettier' },
+        javascript = js_formatter,
+        javascriptreact = js_formatter,
+        typescript = js_formatter,
+        typescriptreact = js_formatter,
+        vue = js_formatter,
+        less = { 'prettier' },
+        html = { 'prettier' },
+        graphql = { 'prettier' },
+        handlebars = { 'prettier' },
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },

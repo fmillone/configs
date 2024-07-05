@@ -180,9 +180,11 @@ return {
             },
           },
         },
+
         marksman = {
           root_pattern = {},
         },
+
         tailwindcss = {
           -- exclude a filetype from the default_config
           filetypes_exclude = { 'markdown' },
@@ -210,6 +212,7 @@ return {
           },
           filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' },
         },
+
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -222,12 +225,12 @@ return {
               hint = {
                 enable = true,
               },
-
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
+
         jsonls = {
           -- lazy-load schemastore when needed
           on_new_config = function(new_config)
@@ -243,6 +246,7 @@ return {
             },
           },
         },
+
         dockerls = {},
         docker_compose_language_service = {},
         yamlls = {
@@ -277,9 +281,15 @@ return {
             },
           },
         },
+
         bashls = {},
         eslint = {},
-        biome = {},
+        biome = {
+          root_pattern = { 'biome.json' },
+        },
+        dprint = {
+          root_pattern = { '.dprint.yaml', '.dprint.json' },
+        },
       }
 
       -- Ensure the servers and tools above are installed
