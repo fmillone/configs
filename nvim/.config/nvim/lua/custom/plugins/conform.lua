@@ -2,7 +2,7 @@ local function js_formatter()
   if vim.fn.glob 'dprint.json' ~= '' then
     return { 'dprint' }
   elseif vim.fn.glob 'deno.json' ~= '' then
-    return { 'deno fmt' }
+    return {} --{ 'deno fmt' } -- Use lsp instead
   elseif vim.fn.glob '.prettierrc' ~= '' then
     return { 'prettier' }
   elseif vim.fn.glob 'biome.json' ~= '' then
