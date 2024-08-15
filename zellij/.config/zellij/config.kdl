@@ -122,13 +122,17 @@ keybinds {
             SwitchToMode "Normal"
         }
     }
+
     tmux {
         bind "[" { SwitchToMode "Scroll"; }
         bind "Ctrl a" { Write 1; SwitchToMode "Locked"; }
         bind "\"" { NewPane "Down"; SwitchToMode "Locked"; }
+        bind "Ctrl 2" { NewPane "Down"; SwitchToMode "Locked"; }
         bind "%" { NewPane "Right"; SwitchToMode "Locked"; }
+        bind "Ctrl 5" { NewPane "Right"; SwitchToMode "Locked"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Locked"; }
         bind "c" { NewTab; SwitchToMode "Locked"; }
+        bind "Ctrl c" { NewTab; SwitchToMode "Locked"; }
         bind "," { SwitchToMode "RenameTab"; }
         bind "p" { GoToPreviousTab; SwitchToMode "Locked"; }
         bind "n" { GoToNextTab; SwitchToMode "Locked"; }
@@ -144,6 +148,7 @@ keybinds {
         bind "d" { Detach; }
         bind "Space" { NextSwapLayout; }
         bind "x" { CloseFocus; SwitchToMode "Locked"; }
+        bind "Ctrl x" { CloseFocus; SwitchToMode "Locked"; }
 
         bind "1" { GoToTab 1; SwitchToMode "Locked"; }
         bind "2" { GoToTab 2; SwitchToMode "Locked"; }
@@ -155,6 +160,7 @@ keybinds {
         bind "8" { GoToTab 8; SwitchToMode "Locked"; }
         bind "9" { GoToTab 9; SwitchToMode "Locked"; }
     }
+
     shared_except "locked" {
         bind "Ctrl g" { SwitchToMode "Locked"; }
         bind "Ctrl q" { Quit; }

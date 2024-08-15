@@ -1,11 +1,15 @@
 local function js_formatter()
   if vim.fn.glob 'dprint.json' ~= '' then
+    -- vim.notify 'format using dprint'
     return { 'dprint' }
   elseif vim.fn.glob 'deno.json' ~= '' then
+    -- vim.notify 'format using Deno lsp'
     return {} --{ 'deno fmt' } -- Use lsp instead
   elseif vim.fn.glob '.prettierrc' ~= '' then
+    -- vim.notify 'format using prettier'
     return { 'prettier' }
   elseif vim.fn.glob 'biome.json' ~= '' then
+    -- vim.notify 'format using biome'
     return { 'biome' }
   end
 end

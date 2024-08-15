@@ -143,7 +143,7 @@ return {
           root_pattern = { 'tsconfig.json', 'package.json', 'jsconfig.json' },
           root_dir = root_pattern_excludes {
             root = 'package.json',
-            exclude = 'deno.json?',
+            exclude = 'deno.json',
           },
           single_file_support = false,
           keys = {
@@ -289,6 +289,7 @@ return {
         },
         dprint = {
           root_pattern = { '.dprint.yaml', '.dprint.json' },
+          single_file_support = false,
         },
       }
 
@@ -324,8 +325,8 @@ return {
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             local lsp = require 'lspconfig'
-            if server.root_pattern and type(server.root_pattern) ~= 'function' then
-              server.root_pattern = lsp.util.root_pattern(server.root_pattern)
+            if server.root_pattern and type(server.root_pattern) ~= 'function' and not server.root_dir then
+              server.root_dir = lsp.util.root_pattern(server.root_pattern)
             end
 
             lsp[server_name].setup(server)
