@@ -56,5 +56,11 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      require('conform').setup(opts)
+      vim.keymap.set('', '<leader>f', function()
+        require('conform').format { async = true, lsp_fallback = true }
+      end, { desc = 'Autoformat' })
+    end,
   },
 }
