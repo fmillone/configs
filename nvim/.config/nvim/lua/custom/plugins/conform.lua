@@ -1,4 +1,24 @@
-local function js_formatter()
+local function is_child_of_folder_containing(pattern, file_path)
+  local path_parts = vim.split(vim.fs.normalize(file_path), '/')
+  local cwd_parts = vim.split(vim.fs.normalize(vim.fn.getcwd()), '/')
+  local relative_file_folder_path = vim.fs.joinpath(unpack(vim.list_slice(path_parts, #cwd_parts + 1, #path_parts)))
+
+  local glob = vim.fn.glob(pattern, false, true)
+  if #glob == 0 then
+    vim.notify('no ' .. pattern)
+    return false
+  end
+  for _, v in pairs(glob) do
+    local parts = vim.split(vim.fs.normalize(v), '/')
+    local base = vim.fs.joinpath(unpack(vim.list_slice(parts, 1, #parts - 1)))
+    if relative_file_folder_path:find(base, 1, true) == 1 then
+      return true
+    end
+  end
+  return false
+end
+
+local function js_formatter(bufnr)
   if vim.fn.glob 'dprint.json' ~= '' then
     -- vim.notify 'format using dprint'
     return { 'dprint' }
@@ -11,6 +31,16 @@ local function js_formatter()
   elseif vim.fn.glob 'biome.json' ~= '' then
     -- vim.notify 'format using biome'
     return { 'biome' }
+  else
+    -- check for monorepo pattern
+    local buff_abs_path = vim.api.nvim_buf_get_name(bufnr)
+    if is_child_of_folder_containing('**/deno.json', buff_abs_path) then
+      return {}
+    elseif is_child_of_folder_containing('**/dprint.json', buff_abs_path) then
+      return { 'dprint' }
+    elseif is_child_of_folder_containing('**/.prettierrc', buff_abs_path) then
+      return { 'prettier' }
+    end
   end
 end
 
