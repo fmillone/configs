@@ -139,7 +139,10 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {
+        ts_ls = {
+          enabled = false,
+        },
+        vtsls = {
           root_pattern = { 'tsconfig.json', 'package.json', 'jsconfig.json' },
           root_dir = root_pattern_excludes {
             root = 'package.json',
@@ -175,8 +178,29 @@ return {
             },
           },
           settings = {
-            completions = {
-              completeFunctionCalls = true,
+            completeFunctionCalls = true,
+            vtsls = {
+              enableMoveToFileCodeAction = true,
+              autoUseWorkspaceTsdk = true,
+              experimental = {
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+            },
+            typescript = {
+              updateImportsOnFileMove = { enabled = 'always' },
+              suggest = {
+                completeFunctionCalls = true,
+              },
+              inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                parameterNames = { enabled = 'literals' },
+                parameterTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                variableTypes = { enabled = true },
+              },
             },
           },
         },
